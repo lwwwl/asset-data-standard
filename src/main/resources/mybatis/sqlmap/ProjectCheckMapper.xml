@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sershare.asset.data.standard.mapper.ProjectCheckMapper">
+  <resultMap id="BaseResultMap" type="com.sershare.asset.data.standard.entity.ProjectCheck">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="project_id" jdbcType="VARCHAR" property="projectId" />
+    <result column="agency_id" jdbcType="VARCHAR" property="agencyId" />
+    <result column="loan_sums" jdbcType="INTEGER" property="loanSums" />
+    <result column="loan_remain_principal" jdbcType="DECIMAL" property="loanRemainPrincipal" />
+    <result column="loan_contract_tol_amounts" jdbcType="DECIMAL" property="loanContractTolAmounts" />
+    <result column="extra_info" jdbcType="CHAR" property="extraInfo" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="extract_date" jdbcType="DATE" property="extractDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, project_id, agency_id, loan_sums, loan_remain_principal, loan_contract_tol_amounts, 
+    extra_info, create_time, update_time,extract_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_project_check
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_project_check
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.weshare.assertstatus.entity.ProjectCheck">
+    insert into t_project_check (project_id, agency_id,
+      loan_sums, loan_remain_principal, loan_contract_tol_amounts, 
+      extra_info, create_time, update_time,extract_date
+      )
+    values ( #{projectId,jdbcType=VARCHAR}, #{agencyId,jdbcType=VARCHAR},
+      #{loanSums,jdbcType=INTEGER}, #{loanRemainPrincipal,jdbcType=DECIMAL}, #{loanContractTolAmounts,jdbcType=DECIMAL}, 
+      #{extraInfo,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{extractDate,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.weshare.assertstatus.entity.ProjectCheck">
+    insert into t_project_check
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="agencyId != null">
+        agency_id,
+      </if>
+      <if test="loanSums != null">
+        loan_sums,
+      </if>
+      <if test="loanRemainPrincipal != null">
+        loan_remain_principal,
+      </if>
+      <if test="loanContractTolAmounts != null">
+        loan_contract_tol_amounts,
+      </if>
+      <if test="extraInfo != null">
+        extra_info,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="extractDate != null">
+        extract_date,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyId != null">
+        #{agencyId,jdbcType=VARCHAR},
+      </if>
+      <if test="loanSums != null">
+        #{loanSums,jdbcType=INTEGER},
+      </if>
+      <if test="loanRemainPrincipal != null">
+        #{loanRemainPrincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="loanContractTolAmounts != null">
+        #{loanContractTolAmounts,jdbcType=DECIMAL},
+      </if>
+      <if test="extraInfo != null">
+        #{extraInfo,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="extractDate != null">
+        #{extractDate,jdbcType=TIMESTAMP},
+      </if>
+
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.weshare.assertstatus.entity.ProjectCheck">
+    update t_project_check
+    <set>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyId != null">
+        agency_id = #{agencyId,jdbcType=VARCHAR},
+      </if>
+      <if test="loanSums != null">
+        loan_sums = #{loanSums,jdbcType=INTEGER},
+      </if>
+      <if test="loanRemainPrincipal != null">
+        loan_remain_principal = #{loanRemainPrincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="loanContractTolAmounts != null">
+        loan_contract_tol_amounts = #{loanContractTolAmounts,jdbcType=DECIMAL},
+      </if>
+      <if test="extraInfo != null">
+        extra_info = #{extraInfo,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="extractDate != null">
+        extract_date = #{extractDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.weshare.assertstatus.entity.ProjectCheck">
+    update t_project_check
+    set project_id = #{projectId,jdbcType=VARCHAR},
+      agency_id = #{agencyId,jdbcType=VARCHAR},
+      loan_sums = #{loanSums,jdbcType=INTEGER},
+      loan_remain_principal = #{loanRemainPrincipal,jdbcType=DECIMAL},
+      loan_contract_tol_amounts = #{loanContractTolAmounts,jdbcType=DECIMAL},
+      extra_info = #{extraInfo,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      extract_date = #{extractDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="selectByUnionKey" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from t_project_check
+    <where>
+      <if test="agencyId!=null and agencyId!=''">
+        agency_id = #{agencyId}
+      </if>
+      <if test="projectId!=null and projectId!=''">
+        AND project_id = #{projectId}
+      </if>
+      order by extract_date desc limit 1
+    </where>
+  </select>
+
+  <select id="selectByExtractDate" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from t_project_check
+    <where>
+      <if test="agencyId!=null and agencyId!=''">
+        agency_id = #{agencyId}
+      </if>
+      <if test="projectId!=null and projectId!=''">
+        AND project_id = #{projectId}
+      </if>
+      <if test="extractDate!=null">
+        AND extract_date = #{extractDate}
+      </if>
+
+    </where>
+  </select>
+</mapper>

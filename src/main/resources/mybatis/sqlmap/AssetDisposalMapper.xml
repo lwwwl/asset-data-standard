@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sershare.asset.data.standard.mapper.AssetDisposalMapper">
+  <resultMap id="BaseResultMap" type="com.weshare.assertstatus.entity.AssetDisposal">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="project_id" jdbcType="VARCHAR" property="projectId" />
+    <result column="agency_id" jdbcType="VARCHAR" property="agencyId" />
+    <result column="asset_id" jdbcType="VARCHAR" property="assetId" />
+    <result column="disposi_status" jdbcType="VARCHAR" property="disposiStatus" />
+    <result column="disposi_type" jdbcType="VARCHAR" property="disposiType" />
+    <result column="litigate_node" jdbcType="VARCHAR" property="litigateNode" />
+    <result column="litigate_node_time" jdbcType="VARCHAR" property="litigateNodeTime" />
+    <result column="disposi_esult" jdbcType="VARCHAR" property="disposiEsult" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, project_id, agency_id, asset_id, disposi_status, disposi_type, litigate_node, 
+    litigate_node_time, disposi_esult, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_asset_disposal
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_asset_disposal
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.weshare.assertstatus.entity.AssetDisposal">
+    insert into t_asset_disposal ( project_id, agency_id,
+      asset_id, disposi_status, disposi_type, 
+      litigate_node, litigate_node_time, disposi_esult, 
+      create_time, update_time)
+    values ( #{projectId,jdbcType=VARCHAR}, #{agencyId,jdbcType=VARCHAR},
+      #{assetId,jdbcType=VARCHAR}, #{disposiStatus,jdbcType=VARCHAR}, #{disposiType,jdbcType=VARCHAR},
+      #{litigateNode,jdbcType=VARCHAR}, #{litigateNodeTime,jdbcType=VARCHAR}, #{disposiEsult,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.weshare.assertstatus.entity.AssetDisposal">
+    insert into t_asset_disposal
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="agencyId != null">
+        agency_id,
+      </if>
+      <if test="assetId != null">
+        asset_id,
+      </if>
+      <if test="disposiStatus != null">
+        disposi_status,
+      </if>
+      <if test="disposiType != null">
+        disposi_type,
+      </if>
+      <if test="litigateNode != null">
+        litigate_node,
+      </if>
+      <if test="litigateNodeTime != null">
+        litigate_node_time,
+      </if>
+      <if test="disposiEsult != null">
+        disposi_esult,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyId != null">
+        #{agencyId,jdbcType=VARCHAR},
+      </if>
+      <if test="assetId != null">
+        #{assetId,jdbcType=VARCHAR},
+      </if>
+      <if test="disposiStatus != null">
+        #{disposiStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="disposiType != null">
+        #{disposiType,jdbcType=VARCHAR},
+      </if>
+      <if test="litigateNode != null">
+        #{litigateNode,jdbcType=VARCHAR},
+      </if>
+      <if test="litigateNodeTime != null">
+        #{litigateNodeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="disposiEsult != null">
+        #{disposiEsult,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.weshare.assertstatus.entity.AssetDisposal">
+    update t_asset_disposal
+    <set>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyId != null">
+        agency_id = #{agencyId,jdbcType=VARCHAR},
+      </if>
+      <if test="assetId != null">
+        asset_id = #{assetId,jdbcType=VARCHAR},
+      </if>
+      <if test="disposiStatus != null">
+        disposi_status = #{disposiStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="disposiType != null">
+        disposi_type = #{disposiType,jdbcType=VARCHAR},
+      </if>
+      <if test="litigateNode != null">
+        litigate_node = #{litigateNode,jdbcType=VARCHAR},
+      </if>
+      <if test="litigateNodeTime != null">
+        litigate_node_time = #{litigateNodeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="disposiEsult != null">
+        disposi_esult = #{disposiEsult,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.weshare.assertstatus.entity.AssetDisposal">
+    update t_asset_disposal
+    set project_id = #{projectId,jdbcType=VARCHAR},
+      agency_id = #{agencyId,jdbcType=VARCHAR},
+      asset_id = #{assetId,jdbcType=VARCHAR},
+      disposi_status = #{disposiStatus,jdbcType=VARCHAR},
+      disposi_type = #{disposiType,jdbcType=VARCHAR},
+      litigate_node = #{litigateNode,jdbcType=VARCHAR},
+      litigate_node_time = #{litigateNodeTime,jdbcType=VARCHAR},
+      disposi_esult = #{disposiEsult,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByUnionKey" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from t_asset_disposal
+    <where>
+      <if test="assetId!=null and assetId!=''">
+        asset_Id = #{assetId}
+      </if>
+      <if test="agencyId!=null and agencyId!=''">
+        AND agency_id = #{agencyId}
+      </if>
+      <if test="projectId!=null and projectId!=''">
+        AND project_id = #{projectId}
+      </if>
+
+    </where>
+  </select>
+</mapper>

@@ -1,0 +1,848 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sershare.asset.data.standard.mapper.RepaymentInfoMapper">
+    <resultMap id="BaseResultMap" type="com.sershare.asset.data.standard.entity.RepaymentInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="import_id" jdbcType="VARCHAR" property="importId"/>
+        <result column="project_id" jdbcType="VARCHAR" property="projectId"/>
+        <result column="agency_id" jdbcType="VARCHAR" property="agencyId"/>
+        <result column="asset_id" jdbcType="VARCHAR" property="assetId"/>
+        <result column="repay_date" jdbcType="DATE" property="repayDate"/>
+        <result column="repay_principal" jdbcType="DECIMAL" property="repayPrincipal"/>
+        <result column="repay_interest" jdbcType="DECIMAL" property="repayInterest"/>
+        <result column="repay_fee" jdbcType="DECIMAL" property="repayFee"/>
+        <result column="repay_penalty" jdbcType="DECIMAL" property="repayPenalty" />
+        <result column="rel_pay_date" jdbcType="DATE" property="relPayDate"/>
+        <result column="rel_principal" jdbcType="DECIMAL" property="relPrincipal"/>
+        <result column="rel_interest" jdbcType="DECIMAL" property="relInterest"/>
+        <result column="rel_fee" jdbcType="DECIMAL" property="relFee"/>
+        <result column="rel_penalty" jdbcType="DECIMAL" property="relPenalty" />
+        <result column="period" jdbcType="INTEGER" property="period"/>
+        <result column="timestamp" jdbcType="TIMESTAMP" property="timestamp"/>
+        <result column="free_amount" jdbcType="DECIMAL" property="freeAmount"/>
+        <result column="extra_info" jdbcType="CHAR" property="extraInfo"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="remainder_principal" jdbcType="DECIMAL" property="remainderPrincipal"/>
+        <result column="remainder_interest" jdbcType="DECIMAL" property="remainderInterest"/>
+        <result column="remainder_fee" jdbcType="DECIMAL" property="remainderFee"/>
+        <result column="remainder_periods" jdbcType="INTEGER" property="remainderPeriods"/>
+        <result column="repay_type" jdbcType="VARCHAR" property="repayType"/>
+        <result column="current_loan_balance" jdbcType="DECIMAL" property="currentLoanBalance"/>
+        <result column="real_interest_rate" jdbcType="DECIMAL" property="realInterestRate"/>
+        <result column="account_status" jdbcType="VARCHAR" property="accountStatus"/>
+        <result column="current_status" jdbcType="VARCHAR" property="currentStatus"/>
+        <result column="overdue_day" jdbcType="INTEGER" property="overdueDay"/>
+        <result column="finish_periods" jdbcType="INTEGER" property="finishPeriods"/>
+        <result column="plan_begin_loan_principal" jdbcType="DECIMAL" property="planBeginLoanPrincipal"/>
+        <result column="plan_end_loan_principal" jdbcType="DECIMAL" property="planEndLoanPrincipal"/>
+        <result column="plan_begin_loan_interest" jdbcType="DECIMAL" property="planBeginLoanInterest"/>
+        <result column="plan_end_loan_interest" jdbcType="DECIMAL" property="planEndLoanInterest"/>
+        <result column="plan_begin_loan_fee" jdbcType="DECIMAL" property="planBeginLoanFee"/>
+        <result column="plan_end_loan_fee" jdbcType="DECIMAL" property="planEndLoanFee"/>
+        <result column="plan_remainder_periods" jdbcType="INTEGER" property="planRemainderPeriods"/>
+        <result column="plan_next_repay_date" jdbcType="DATE" property="planNextRepayDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, import_id, project_id, agency_id, asset_id, repay_date,repay_principal,repay_interest, repay_fee,repay_penalty,rel_pay_date, rel_principal,
+    rel_interest, rel_fee, rel_penalty,period, timestamp,free_amount,extra_info, create_time, update_time,
+    remainder_principal, remainder_interest, remainder_fee, remainder_periods,repay_type,current_loan_balance,real_interest_rate,
+    account_status,current_status,overdue_day,finish_periods,plan_begin_loan_principal,plan_end_loan_principal,plan_begin_loan_interest,
+    plan_end_loan_interest,plan_begin_loan_fee,plan_end_loan_fee,plan_remainder_periods,plan_next_repay_date
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_repayment_info
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_repayment_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.weshare.assertstatus.entity.RepaymentInfo" useGeneratedKeys="true"
+            keyProperty="id">
+    insert into t_repayment_info (id, import_id, project_id,
+      agency_id, asset_id, repay_date,
+      repay_principal, repay_interest, repay_fee,repay_penalty,
+      rel_pay_date, rel_principal, rel_interest,
+      rel_fee,rel_penalty, period, timestamp,
+      extra_info, create_time, update_time,
+      free_amount, remainder_principal, remainder_interest,
+      remainder_fee, remainder_periods, repay_type,
+      current_loan_balance, real_interest_rate,account_status, current_status,overdue_day,
+      finish_periods, plan_begin_loan_principal,
+      plan_end_loan_principal, plan_begin_loan_interest,
+      plan_end_loan_interest, plan_begin_loan_fee,
+      plan_end_loan_fee, plan_remainder_periods, plan_next_repay_date
+      )
+    values (#{id,jdbcType=INTEGER}, #{importId,jdbcType=VARCHAR}, #{projectId,jdbcType=VARCHAR},
+      #{agencyId,jdbcType=VARCHAR}, #{assetId,jdbcType=VARCHAR}, #{repayDate,jdbcType=DATE},
+      #{repayPrincipal,jdbcType=DECIMAL}, #{repayInterest,jdbcType=DECIMAL}, #{repayFee,jdbcType=DECIMAL},#{repayPenalty,jdbcType=DECIMAL},
+      #{relPayDate,jdbcType=DATE}, #{relPrincipal,jdbcType=DECIMAL}, #{relInterest,jdbcType=DECIMAL},
+      #{relFee,jdbcType=DECIMAL},#{relPenalty,jdbcType=DECIMAL}, #{period,jdbcType=INTEGER}, #{timestamp,jdbcType=TIMESTAMP},
+      #{extraInfo,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+      #{freeAmount,jdbcType=DECIMAL}, #{remainderPrincipal,jdbcType=DECIMAL}, #{remainderInterest,jdbcType=DECIMAL},
+      #{remainderFee,jdbcType=DECIMAL}, #{remainderPeriods,jdbcType=INTEGER}, #{repayType,jdbcType=VARCHAR},
+      #{currentLoanBalance,jdbcType=DECIMAL},#{realInterestRate}, #{accountStatus,jdbcType=VARCHAR}, #{currentStatus},#{overdueDay,jdbcType=INTEGER},
+      #{finishPeriods,jdbcType=INTEGER}, #{planBeginLoanPrincipal,jdbcType=DECIMAL},
+      #{planEndLoanPrincipal,jdbcType=DECIMAL}, #{planBeginLoanInterest,jdbcType=DECIMAL},
+      #{planEndLoanInterest,jdbcType=DECIMAL}, #{planBeginLoanFee,jdbcType=DECIMAL},
+      #{planEndLoanFee,jdbcType=DECIMAL}, #{planRemainderPeriods,jdbcType=INTEGER}, #{planNextRepayDate,jdbcType=DATE}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.weshare.assertstatus.entity.RepaymentInfo" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into t_repayment_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="importId != null">
+                import_id,
+            </if>
+            <if test="projectId != null">
+                project_id,
+            </if>
+            <if test="agencyId != null">
+                agency_id,
+            </if>
+            <if test="assetId != null">
+                asset_id,
+            </if>
+            <if test="repayDate != null">
+                repay_date,
+            </if>
+            <if test="repayPrincipal != null">
+                repay_principal,
+            </if>
+            <if test="repayInterest != null">
+                repay_interest,
+            </if>
+            <if test="repayFee != null">
+                repay_fee,
+            </if>
+            <if test="repayPenalty != null">
+                repay_penalty,
+            </if>
+            <if test="relPayDate != null">
+                rel_pay_date,
+            </if>
+            <if test="relPrincipal != null">
+                rel_principal,
+            </if>
+            <if test="relInterest != null">
+                rel_interest,
+            </if>
+            <if test="relFee != null">
+                rel_fee,
+            </if>
+            <if test="relPenalty != null">
+                rel_penalty,
+            </if>
+            <if test="period != null">
+                period,
+            </if>
+            <if test="timestamp != null">
+                timestamp,
+            </if>
+            <if test="extraInfo != null">
+                extra_info,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="freeAmount != null">
+                free_amount,
+            </if>
+            <if test="remainderPrincipal != null">
+                remainder_principal,
+            </if>
+            <if test="remainderInterest != null">
+                remainder_interest,
+            </if>
+            <if test="remainderFee != null">
+                remainder_fee,
+            </if>
+            <if test="remainderPeriods != null">
+                remainder_periods,
+            </if>
+            <if test="repayType != null">
+                repay_type,
+            </if>
+            <if test="currentLoanBalance != null">
+                current_loan_balance,
+            </if>
+            <if test="realInterestRate != null">
+                real_interest_rate,
+            </if>
+
+            <if test="accountStatus != null">
+                account_status,
+            </if>
+            <if test="currentStatus != null">
+                current_status,
+            </if>
+            <if test="overdueDay != null">
+                overdue_day,
+            </if>
+            <if test="finishPeriods != null">
+                finish_periods,
+            </if>
+            <if test="planBeginLoanPrincipal != null">
+                plan_begin_loan_principal,
+            </if>
+            <if test="planEndLoanPrincipal != null">
+                plan_end_loan_principal,
+            </if>
+            <if test="planBeginLoanInterest != null">
+                plan_begin_loan_interest,
+            </if>
+            <if test="planEndLoanInterest != null">
+                plan_end_loan_interest,
+            </if>
+            <if test="planBeginLoanFee != null">
+                plan_begin_loan_fee,
+            </if>
+            <if test="planEndLoanFee != null">
+                plan_end_loan_fee,
+            </if>
+            <if test="planRemainderPeriods != null">
+                plan_remainder_periods,
+            </if>
+            <if test="planNextRepayDate != null">
+                plan_next_repay_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="importId != null">
+                #{importId,jdbcType=VARCHAR},
+            </if>
+            <if test="projectId != null">
+                #{projectId,jdbcType=VARCHAR},
+            </if>
+            <if test="agencyId != null">
+                #{agencyId,jdbcType=VARCHAR},
+            </if>
+            <if test="assetId != null">
+                #{assetId,jdbcType=VARCHAR},
+            </if>
+            <if test="repayDate != null">
+                #{repayDate,jdbcType=DATE},
+            </if>
+            <if test="repayPrincipal != null">
+                #{repayPrincipal,jdbcType=DECIMAL},
+            </if>
+            <if test="repayInterest != null">
+                #{repayInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="repayFee != null">
+                #{repayFee,jdbcType=DECIMAL},
+            </if>
+            <if test="repayPenalty != null">
+                #{repayPenalty,jdbcType=DECIMAL},
+            </if>
+            <if test="relPayDate != null">
+                #{relPayDate,jdbcType=DATE},
+            </if>
+            <if test="relPrincipal != null">
+                #{relPrincipal,jdbcType=DECIMAL},
+            </if>
+            <if test="relInterest != null">
+                #{relInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="relFee != null">
+                #{relFee,jdbcType=DECIMAL},
+            </if>
+            <if test="relPenalty != null">
+                #{relPenalty,jdbcType=DECIMAL},
+            </if>
+            <if test="period != null">
+                #{period,jdbcType=INTEGER},
+            </if>
+            <if test="timestamp != null">
+                #{timestamp,jdbcType=TIMESTAMP},
+            </if>
+            <if test="extraInfo != null">
+                #{extraInfo,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="freeAmount != null">
+                #{freeAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="remainderPrincipal != null">
+                #{remainderPrincipal,jdbcType=DECIMAL},
+            </if>
+            <if test="remainderInterest != null">
+                #{remainderInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="remainderFee != null">
+                #{remainderFee,jdbcType=DECIMAL},
+            </if>
+            <if test="remainderPeriods != null">
+                #{remainderPeriods,jdbcType=INTEGER},
+            </if>
+            <if test="repayType != null">
+                #{repayType,jdbcType=VARCHAR},
+            </if>
+            <if test="currentLoanBalance != null">
+                #{currentLoanBalance,jdbcType=DECIMAL},
+            </if>
+            <if test="realInterestRate != null">
+                #{realInterestRate,jdbcType=DECIMAL},
+            </if>
+
+            <if test="accountStatus != null">
+                #{accountStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="currentStatus != null">
+                #{currentStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="overdueDay != null">
+                #{overdueDay,jdbcType=INTEGER},
+            </if>
+            <if test="finishPeriods != null">
+                #{finishPeriods,jdbcType=INTEGER},
+            </if>
+            <if test="planBeginLoanPrincipal != null">
+                #{planBeginLoanPrincipal,jdbcType=DECIMAL},
+            </if>
+            <if test="planEndLoanPrincipal != null">
+                #{planEndLoanPrincipal,jdbcType=DECIMAL},
+            </if>
+            <if test="planBeginLoanInterest != null">
+                #{planBeginLoanInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="planEndLoanInterest != null">
+                #{planEndLoanInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="planBeginLoanFee != null">
+                #{planBeginLoanFee,jdbcType=DECIMAL},
+            </if>
+            <if test="planEndLoanFee != null">
+                #{planEndLoanFee,jdbcType=DECIMAL},
+            </if>
+            <if test="planRemainderPeriods != null">
+                #{planRemainderPeriods,jdbcType=INTEGER},
+            </if>
+            <if test="planNextRepayDate != null">
+                #{planNextRepayDate,jdbcType=DATE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.weshare.assertstatus.entity.RepaymentInfo">
+        update t_repayment_info
+        <set>
+            <if test="importId != null">
+                import_id = #{importId,jdbcType=VARCHAR},
+            </if>
+            <if test="projectId != null">
+                project_id = #{projectId,jdbcType=VARCHAR},
+            </if>
+            <if test="agencyId != null">
+                agency_id = #{agencyId,jdbcType=VARCHAR},
+            </if>
+            <if test="assetId != null">
+                asset_id = #{assetId,jdbcType=VARCHAR},
+            </if>
+            <if test="repayDate != null">
+                repay_date = #{repayDate,jdbcType=DATE},
+            </if>
+            <if test="repayPrincipal != null">
+                repay_principal = #{repayPrincipal,jdbcType=DECIMAL},
+            </if>
+            <if test="repayInterest != null">
+                repay_interest = #{repayInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="repayFee != null">
+                repay_fee = #{repayFee,jdbcType=DECIMAL},
+            </if>
+            <if test="repayPenalty != null">
+                repay_penalty = #{repayPenalty,jdbcType=DECIMAL},
+            </if>
+            <if test="relPayDate != null">
+                rel_pay_date = #{relPayDate,jdbcType=DATE},
+            </if>
+            <if test="relPrincipal != null">
+                rel_principal = #{relPrincipal,jdbcType=DECIMAL},
+            </if>
+            <if test="relInterest != null">
+                rel_interest = #{relInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="relFee != null">
+                rel_fee = #{relFee,jdbcType=DECIMAL},
+            </if>
+            <if test="relPenalty != null">
+                rel_penalty = #{relPenalty,jdbcType=DECIMAL},
+            </if>
+            <if test="period != null">
+                period = #{period,jdbcType=INTEGER},
+            </if>
+            <if test="timestamp != null">
+                timestamp = #{timestamp,jdbcType=TIMESTAMP},
+            </if>
+            <if test="extraInfo != null">
+                extra_info = #{extraInfo,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="freeAmount != null">
+                free_amount = #{freeAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="remainderPrincipal != null">
+                remainder_principal = #{remainderPrincipal,jdbcType=DECIMAL},
+            </if>
+            <if test="remainderInterest != null">
+                remainder_interest = #{remainderInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="remainderFee != null">
+                remainder_fee = #{remainderFee,jdbcType=DECIMAL},
+            </if>
+            <if test="remainderPeriods != null">
+                remainder_periods = #{remainderPeriods,jdbcType=INTEGER},
+            </if>
+            <if test="repayType != null">
+                repay_type = #{repayType,jdbcType=VARCHAR},
+            </if>
+            <if test="currentLoanBalance != null">
+                current_loan_balance = #{currentLoanBalance,jdbcType=DECIMAL},
+            </if>
+            <if test="realInterestRate != null">
+                real_interest_rate = #{realInterestRate,jdbcType=DECIMAL},
+            </if>
+
+            <if test="accountStatus != null">
+                account_status = #{accountStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="currentStatus != null">
+                current_status = #{currentStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="overdueDay != null">
+                overdue_day = #{overdueDay,jdbcType=INTEGER},
+            </if>
+            <if test="finishPeriods != null">
+                finish_periods = #{finishPeriods,jdbcType=INTEGER},
+            </if>
+            <if test="planBeginLoanPrincipal != null">
+                plan_begin_loan_principal = #{planBeginLoanPrincipal,jdbcType=DECIMAL},
+            </if>
+            <if test="planEndLoanPrincipal != null">
+                plan_end_loan_principal = #{planEndLoanPrincipal,jdbcType=DECIMAL},
+            </if>
+            <if test="planBeginLoanInterest != null">
+                plan_begin_loan_interest = #{planBeginLoanInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="planEndLoanInterest != null">
+                plan_end_loan_interest = #{planEndLoanInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="planBeginLoanFee != null">
+                plan_begin_loan_fee = #{planBeginLoanFee,jdbcType=DECIMAL},
+            </if>
+            <if test="planEndLoanFee != null">
+                plan_end_loan_fee = #{planEndLoanFee,jdbcType=DECIMAL},
+            </if>
+            <if test="planRemainderPeriods != null">
+                plan_remainder_periods = #{planRemainderPeriods,jdbcType=INTEGER},
+            </if>
+            <if test="planNextRepayDate != null">
+                plan_next_repay_date = #{planNextRepayDate,jdbcType=DATE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.weshare.assertstatus.entity.RepaymentInfo">
+    update t_repayment_info
+    set import_id = #{importId,jdbcType=VARCHAR},
+      project_id = #{projectId,jdbcType=VARCHAR},
+      agency_id = #{agencyId,jdbcType=VARCHAR},
+      asset_id = #{assetId,jdbcType=VARCHAR},
+      repay_date = #{repayDate,jdbcType=DATE},
+      repay_principal = #{repayPrincipal,jdbcType=DECIMAL},
+      repay_interest = #{repayInterest,jdbcType=DECIMAL},
+      repay_fee = #{repayFee,jdbcType=DECIMAL},
+      repay_penalty = #{repayPenalty,jdbcType=DECIMAL},
+      rel_pay_date = #{relPayDate,jdbcType=DATE},
+      rel_principal = #{relPrincipal,jdbcType=DECIMAL},
+      rel_interest = #{relInterest,jdbcType=DECIMAL},
+      rel_fee = #{relFee,jdbcType=DECIMAL},
+      rel_penalty = #{relPenalty,jdbcType=DECIMAL},
+      period = #{period,jdbcType=INTEGER},
+      timestamp = #{timestamp,jdbcType=TIMESTAMP},
+      extra_info = #{extraInfo,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      free_amount = #{freeAmount,jdbcType=DECIMAL},
+      remainder_principal = #{remainderPrincipal,jdbcType=DECIMAL},
+      remainder_interest = #{remainderInterest,jdbcType=DECIMAL},
+      remainder_fee = #{remainderFee,jdbcType=DECIMAL},
+      remainder_periods = #{remainderPeriods,jdbcType=INTEGER},
+      repay_type = #{repayType,jdbcType=VARCHAR},
+      current_loan_balance = #{currentLoanBalance,jdbcType=DECIMAL},
+      real_interest_rate = #{realInterestRate,jdbcType=DECIMAL},
+      account_status = #{accountStatus,jdbcType=VARCHAR},
+      current_status = #{currentStatus,jdbcType=VARCHAR},
+      overdue_day = #{overdueDay,jdbcType=INTEGER},
+      finish_periods = #{finishPeriods,jdbcType=INTEGER},
+      plan_begin_loan_principal = #{planBeginLoanPrincipal,jdbcType=DECIMAL},
+      plan_end_loan_principal = #{planEndLoanPrincipal,jdbcType=DECIMAL},
+      plan_begin_loan_interest = #{planBeginLoanInterest,jdbcType=DECIMAL},
+      plan_end_loan_interest = #{planEndLoanInterest,jdbcType=DECIMAL},
+      plan_begin_loan_fee = #{planBeginLoanFee,jdbcType=DECIMAL},
+      plan_end_loan_fee = #{planEndLoanFee,jdbcType=DECIMAL},
+      plan_remainder_periods = #{planRemainderPeriods,jdbcType=INTEGER},
+      plan_next_repay_date = #{planNextRepayDate,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="selectByUnionKey" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_repayment_info
+        <trim prefix="WHERE (" suffix=")" prefixOverrides="AND |OR ">
+            period != 0
+            <if test="projectId != null">
+                and project_id = #{projectId,jdbcType=VARCHAR}
+            </if>
+            <if test="assetId != null">
+                and asset_id = #{assetId,jdbcType=VARCHAR}
+            </if>
+            <if test="repayDate != null">
+                and repay_date = #{repayDate,jdbcType=DATE}
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <select id="selectAllRepaymentInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_repayment_info
+        <where>
+
+            <if test="projectId != null">
+                project_id = #{projectId,jdbcType=VARCHAR}
+            </if>
+            <if test="assetId != null">
+                and asset_id = #{assetId,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectRepayInfoByLessDate" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_repayment_info
+        <where>
+
+            <if test="projectId != null">
+                project_id = #{projectId,jdbcType=VARCHAR}
+            </if>
+            <if test="assetId != null">
+                and asset_id = #{assetId,jdbcType=VARCHAR}
+            </if>
+            <if test="repayDate != null">
+                and repay_date &lt;= #{repayDate,jdbcType=DATE}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectRepayInfoByRelDate" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_repayment_info
+        <where>
+
+            <if test="relPayDate != null">
+                rel_pay_date = #{relPayDate,jdbcType=DATE}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectRepayInfoMoreThanRelDate" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_repayment_info
+        <where>
+
+            <if test="assetId != null">
+                asset_id = #{assetId,jdbcType=VARCHAR}
+            </if>
+
+            <if test="relPayDate != null">
+                AND rel_pay_date &lt;= #{relPayDate,jdbcType=DATE}
+            </if>
+        </where>
+    </select>
+
+
+    <select id="selectByCompositeKeys" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_repayment_info
+        <where>
+            <if test="assetId!=null and assetId!=''">
+                asset_Id = #{assetId}
+            </if>
+            <if test="agencyId!=null and agencyId!=''">
+                AND agency_id = #{agencyId}
+            </if>
+            <if test="projectId!=null and projectId!=''">
+                AND project_id = #{projectId}
+            </if>
+        </where>
+        order by period
+    </select>
+
+    <select id="selectByProjectIdAndPeriod" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_repayment_info
+        <where>
+            <if test="assetId!=null and assetId!=''">
+                asset_Id = #{assetId}
+            </if>
+            <if test="projectId!=null and projectId!=''">
+                AND project_id = #{projectId}
+            </if>
+            <if test="period!=null">
+                AND period = #{period}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectUnionByRelDate" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_repayment_info
+        <where>
+
+            <if test="assetId!=null and assetId!=''">
+                asset_Id = #{assetId}
+            </if>
+            <if test="projectId!=null and projectId!=''">
+                AND project_id = #{projectId}
+            </if>
+            <if test="relPayDate!=null">
+                AND rel_pay_date = #{relPayDate}
+            </if>
+
+        </where>
+        AND period != 0
+    </select>
+
+    <select id="selectUnionByRelDateAndPeriod" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_repayment_info
+        <where>
+
+            <if test="period!=null">
+                and period = #{period}
+            </if>
+
+            <if test="assetId!=null and assetId!=''">
+                and asset_Id = #{assetId}
+            </if>
+            <if test="projectId!=null and projectId!=''">
+                AND project_id = #{projectId}
+            </if>
+            <if test="relPayDate!=null">
+                AND rel_pay_date = #{relPayDate}
+            </if>
+
+        </where>
+
+    </select>
+
+    <select id="selectUnionByRelDateAndPeriodAndRepayDate" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_repayment_info
+        <where>
+
+            <if test="period!=null">
+                and period = #{period}
+            </if>
+
+            <if test="assetId!=null and assetId!=''">
+                and asset_Id = #{assetId}
+            </if>
+            <if test="projectId!=null and projectId!=''">
+                AND project_id = #{projectId}
+            </if>
+            <if test="relPayDate!=null">
+                AND rel_pay_date = #{relPayDate}
+            </if>
+            <if test="repayDate != null">
+                AND repay_date = #{repayDate}
+            </if>
+
+        </where>
+
+    </select>
+
+    <select id="selectByPeriodKey" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_repayment_info
+        <where>
+
+            <if test="period!=null">
+                and period = #{period}
+            </if>
+
+            <if test="assetId!=null and assetId!=''">
+                and asset_Id = #{assetId}
+            </if>
+            <if test="projectId!=null and projectId!=''">
+                AND project_id = #{projectId}
+            </if>
+
+            <if test="relPayDate!=null">
+                AND rel_pay_date = #{relPayDate}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectRepayInfoByUnionAndRelPayDate" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_repayment_info
+        <where>
+            <if test="projectId!=null and projectId!=''">
+                project_id = #{projectId}
+            </if>
+            <if test="assetId!=null and assetId!=''">
+                AND asset_Id = #{assetId}
+            </if>
+            <if test="relPayDate!=null">
+                AND rel_pay_date = #{relPayDate}
+            </if>
+        </where>
+        order by create_time desc limit 1
+    </select>
+
+    <select id="selectByProjectId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_repayment_info
+        where project_id = #{projectId}
+        limit 1
+    </select>
+
+    <select id="selectNormalData" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_repayment_info
+        where project_id = #{projectId,jdbcType=VARCHAR}
+        and asset_id = #{assetId,jdbcType=VARCHAR}
+        order by period asc
+    </select>
+
+    <select id="selectRepaymentInfoStatus" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_repayment_info
+        where project_id = #{projectId}
+        and asset_id  in (select asset_id from t_loan_contract_info WHERE project_id = #{projectId} and asset_id = #{assetId} and verify_status != #{status})
+    </select>
+
+    <select id="countRepayment" resultType="int">
+        select count(1) from t_repayment_info where period != 0
+    </select>
+
+    <select id="selectRepayment" parameterType="int" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from t_repayment_info where period != 0 limit #{start},#{end}
+    </select>
+
+    <update id="updateRelFeeByZero"  parameterType="com.weshare.assertstatus.entity.RepaymentInfo">
+        update t_repayment_info set rel_fee = rel_fee + #{relFee} where id= #{id}
+    </update>
+
+
+    <select id="selectPartRepayment" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_repayment_info
+        <where>
+
+            <if test="period!=null">
+                and period = #{period}
+            </if>
+
+            <if test="assetId!=null and assetId!=''">
+                and asset_Id = #{assetId}
+            </if>
+            <if test="projectId!=null and projectId!=''">
+                AND project_id = #{projectId}
+            </if>
+
+            <if test="repayDate != null">
+                AND repay_date = #{repayDate}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByUpdateTime" resultType="com.weshare.assertstatus.entity.RepaymentInfo">
+        SELECT
+        t.import_id as "importId",
+        t.project_id AS "projectId",
+        t.agency_id AS "agencyId",
+        t.asset_id AS "assetId",
+        t.period AS "period",
+        DATE_FORMAT( t.repay_date,"%Y-%m-%d") AS "repayDate",
+        t.repay_principal AS "repayPrincipal",
+        t.repay_interest AS "repayInterest",
+        t.repay_fee AS "repayFee",
+        t.rel_principal as "relPrincipal",
+        t.rel_interest as "relInterest",
+        t.rel_fee as "relFee",
+        DATE_FORMAT(t.rel_pay_date,"%Y-%m-%d") as "relPayDate",
+        t.repay_type as "repayType",
+        t.current_loan_balance as "currentLoanBalance" ,
+        t.remainder_principal as "remainderPrincipal",
+        t.remainder_interest as "remainderInterest",
+        t.remainder_fee as "remainderInterest",
+        t.remainder_periods as "remainderPeriods",
+        t.account_status as "accountStatus" from t_repayment_info t where t.period != 0 and
+        asset_id  in (select asset_id from t_loan_contract_info WHERE project_id =  #{projectId,jdbcType=VARCHAR}  and  verify_status != '已修正数据') and DATE_FORMAT(update_time,'%Y-%m-%d') = #{date}
+        union ALL
+        SELECT
+        t.import_id as "importId",
+        t.project_id AS "projectId",
+        t.agency_id AS "agencyId",
+        t.asset_id AS "assetId",
+        t.period AS "period",
+        DATE_FORMAT( t.repay_date,"%Y-%m-%d") AS "repayDate",
+        t.repay_principal AS "repayPrincipal",
+        t.repay_interest AS "repayInterest",
+        t.repay_fee AS "repayFee",
+        t.rel_principal as "relPrincipal",
+        t.rel_interest as "relInterest",
+        t.rel_fee as "relFee",
+        DATE_FORMAT(t.rel_pay_date,"%Y-%m-%d") as "relPayDate",
+        t.repay_type as "repayType",
+        t.current_loan_balance as "currentLoanBalance" ,
+        t.remainder_principal as "remainderPrincipal",
+        t.remainder_interest as "remainderInterest",
+        t.remainder_fee as "remainderInterest",
+        t.remainder_periods as "remainderPeriods",
+        t.account_status as "accountStatus" from t_repayment_info_fix t where t.period != 0 and
+        asset_id  in (select asset_id from t_loan_contract_info WHERE project_id =  #{projectId,jdbcType=VARCHAR}  and  verify_status= '已修正数据') and DATE_FORMAT(update_time,'%Y-%m-%d') = #{date}
+    </select>
+</mapper>

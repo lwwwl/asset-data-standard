@@ -1,0 +1,845 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sershare.asset.data.standard.mapper.AssetCheckMapper">
+  <resultMap id="BaseResultMap" type="com.weshare.assertstatus.entity.AssetCheck">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="project_id" jdbcType="VARCHAR" property="projectId" />
+    <result column="agency_id" jdbcType="VARCHAR" property="agencyId" />
+    <result column="asset_id" jdbcType="VARCHAR" property="assetId" />
+    <result column="account_date" jdbcType="DATE" property="accountDate" />
+    <result column="repayedPeriod" jdbcType="INTEGER" property="repayedperiod" />
+    <result column="remain_period" jdbcType="INTEGER" property="remainPeriod" />
+    <result column="remain_principal" jdbcType="DECIMAL" property="remainPrincipal" />
+    <result column="remain_interest" jdbcType="DECIMAL" property="remainInterest" />
+    <result column="remain_othAmounts" jdbcType="DECIMAL" property="remainOthamounts" />
+    <result column="next_pay_date" jdbcType="DATE" property="nextPayDate" />
+    <result column="assets_status" jdbcType="VARCHAR" property="assetsStatus" />
+    <result column="settle_reason" jdbcType="VARCHAR" property="settleReason" />
+    <result column="current_overdue_principal" jdbcType="DECIMAL" property="currentOverduePrincipal" />
+    <result column="current_overdue_interest" jdbcType="DECIMAL" property="currentOverdueInterest" />
+    <result column="current_overdue_fee" jdbcType="DECIMAL" property="currentOverdueFee" />
+    <result column="current_overdue_days" jdbcType="INTEGER" property="currentOverdueDays" />
+    <result column="accum_overdue_days" jdbcType="INTEGER" property="accumOverdueDays" />
+    <result column="his_accum_overdue_days" jdbcType="INTEGER" property="hisAccumOverdueDays" />
+    <result column="his_overdue_mdays" jdbcType="INTEGER" property="hisOverdueMdays" />
+    <result column="current_overdue_period" jdbcType="INTEGER" property="currentOverduePeriod" />
+    <result column="accum_overdue_period" jdbcType="INTEGER" property="accumOverduePeriod" />
+    <result column="his_overdue_mperiods" jdbcType="INTEGER" property="hisOverdueMperiods" />
+    <result column="his_overdue_mprincipal" jdbcType="DECIMAL" property="hisOverdueMprincipal" />
+    <result column="extra_info" jdbcType="CHAR" property="extraInfo" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="loan_total_amount" jdbcType="DECIMAL" property="loanTotalAmount" />
+    <result column="loan_interest_rate" jdbcType="DECIMAL" property="loanInterestRate" />
+    <result column="periods" jdbcType="INTEGER" property="periods" />
+    <result column="recovered_total_amount" jdbcType="DECIMAL" property="recoveredTotalAmount" />
+    <result column="rel_principal" jdbcType="DECIMAL" property="relPrincipal" />
+    <result column="rel_interest" jdbcType="DECIMAL" property="relInterest" />
+    <result column="rel_fee" jdbcType="DECIMAL" property="relFee" />
+    <result column="current_continuity_overdays" jdbcType="INTEGER" property="currentContinuityOverdays" />
+    <result column="max_single_overduedays" jdbcType="INTEGER" property="maxSingleOverduedays" />
+    <result column="max_continuity_overdays" jdbcType="INTEGER" property="maxContinuityOverdays" />
+    <result column="loan_settlement_date" jdbcType="DATE" property="loanSettlementDate" />
+    <result column="loss_principal" jdbcType="DECIMAL" property="lossPrincipal" />
+    <result column="remain_penalty" jdbcType="DECIMAL" property="remainPenalty" />
+    <result column="total_rel_amount" jdbcType="DECIMAL" property="totalRelAmount" />
+    <result column="total_rel_principal" jdbcType="DECIMAL" property="totalRelPrincipal" />
+    <result column="total_rel_interest" jdbcType="DECIMAL" property="totalRelInterest" />
+    <result column="total_rel_fee" jdbcType="DECIMAL" property="totalRelFee" />
+    <result column="total_rel_penalty" jdbcType="DECIMAL" property="totalRelPenalty" />
+    <result column="rel_penalty" jdbcType="DECIMAL" property="relPenalty" />
+    <result column="curr_period" jdbcType="INTEGER" property="currPeriod" />
+    <result column="first_term_overdue" jdbcType="VARCHAR" property="firstTermOverdue" />
+    <result column="accum_overdue_principal" jdbcType="DECIMAL" property="accumOverduePrincipal"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, project_id, agency_id, asset_id, account_date, repayedPeriod, remain_period,
+    remain_principal, remain_interest, remain_othAmounts, next_pay_date, assets_status,
+    settle_reason, current_overdue_principal, current_overdue_interest, current_overdue_fee,
+    current_overdue_days, accum_overdue_days, his_accum_overdue_days, his_overdue_mdays,
+    current_overdue_period, accum_overdue_period, his_overdue_mperiods, his_overdue_mprincipal,
+    extra_info, remark, create_time, update_time, loan_total_amount, loan_interest_rate,
+    periods, recovered_total_amount, rel_principal, rel_interest, rel_fee, current_continuity_overdays,
+    max_single_overduedays, max_continuity_overdays, loan_settlement_date, loss_principal,
+    remain_penalty, total_rel_amount, total_rel_principal, total_rel_interest, total_rel_fee,
+    total_rel_penalty, rel_penalty, curr_period, first_term_overdue,accum_overdue_principal
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_asset_check
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_asset_check
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.weshare.assertstatus.entity.AssetCheck">
+    insert into t_asset_check (id, project_id, agency_id,
+      asset_id, account_date, repayedPeriod,
+      remain_period, remain_principal, remain_interest,
+      remain_othAmounts, next_pay_date, assets_status,
+      settle_reason, current_overdue_principal,
+      current_overdue_interest, current_overdue_fee,
+      current_overdue_days, accum_overdue_days, his_accum_overdue_days,
+      his_overdue_mdays, current_overdue_period,
+      accum_overdue_period, his_overdue_mperiods,
+      his_overdue_mprincipal, extra_info, remark,
+      create_time, update_time, loan_total_amount,
+      loan_interest_rate, periods, recovered_total_amount,
+      rel_principal, rel_interest, rel_fee,
+      current_continuity_overdays, max_single_overduedays,
+      max_continuity_overdays, loan_settlement_date,
+      loss_principal, remain_penalty, total_rel_amount,
+      total_rel_principal, total_rel_interest, total_rel_fee,
+      total_rel_penalty, rel_penalty, curr_period,
+      first_term_overdue,accum_overdue_principal)
+    values (#{id,jdbcType=INTEGER}, #{projectId,jdbcType=VARCHAR}, #{agencyId,jdbcType=VARCHAR},
+      #{assetId,jdbcType=VARCHAR}, #{accountDate,jdbcType=DATE}, #{repayedperiod,jdbcType=INTEGER},
+      #{remainPeriod,jdbcType=INTEGER}, #{remainPrincipal,jdbcType=DECIMAL}, #{remainInterest,jdbcType=DECIMAL},
+      #{remainOthamounts,jdbcType=DECIMAL}, #{nextPayDate,jdbcType=DATE}, #{assetsStatus,jdbcType=VARCHAR},
+      #{settleReason,jdbcType=VARCHAR}, #{currentOverduePrincipal,jdbcType=DECIMAL},
+      #{currentOverdueInterest,jdbcType=DECIMAL}, #{currentOverdueFee,jdbcType=DECIMAL},
+      #{currentOverdueDays,jdbcType=INTEGER}, #{accumOverdueDays,jdbcType=INTEGER}, #{hisAccumOverdueDays,jdbcType=INTEGER},
+      #{hisOverdueMdays,jdbcType=INTEGER}, #{currentOverduePeriod,jdbcType=INTEGER},
+      #{accumOverduePeriod,jdbcType=INTEGER}, #{hisOverdueMperiods,jdbcType=INTEGER},
+      #{hisOverdueMprincipal,jdbcType=DECIMAL}, #{extraInfo,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{loanTotalAmount,jdbcType=DECIMAL},
+      #{loanInterestRate,jdbcType=DECIMAL}, #{periods,jdbcType=INTEGER}, #{recoveredTotalAmount,jdbcType=DECIMAL},
+      #{relPrincipal,jdbcType=DECIMAL}, #{relInterest,jdbcType=DECIMAL}, #{relFee,jdbcType=DECIMAL},
+      #{currentContinuityOverdays,jdbcType=INTEGER}, #{maxSingleOverduedays,jdbcType=INTEGER},
+      #{maxContinuityOverdays,jdbcType=INTEGER}, #{loanSettlementDate,jdbcType=DATE},
+      #{lossPrincipal,jdbcType=DECIMAL}, #{remainPenalty,jdbcType=DECIMAL}, #{totalRelAmount,jdbcType=DECIMAL},
+      #{totalRelPrincipal,jdbcType=DECIMAL}, #{totalRelInterest,jdbcType=DECIMAL}, #{totalRelFee,jdbcType=DECIMAL},
+      #{totalRelPenalty,jdbcType=DECIMAL}, #{relPenalty,jdbcType=DECIMAL}, #{currPeriod,jdbcType=INTEGER},
+      #{firstTermOverdue,jdbcType=VARCHAR},#{accumOverduePrincipal,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.weshare.assertstatus.entity.AssetCheck">
+    insert into t_asset_check
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="agencyId != null">
+        agency_id,
+      </if>
+      <if test="assetId != null">
+        asset_id,
+      </if>
+      <if test="accountDate != null">
+        account_date,
+      </if>
+      <if test="repayedperiod != null">
+        repayedPeriod,
+      </if>
+      <if test="remainPeriod != null">
+        remain_period,
+      </if>
+      <if test="remainPrincipal != null">
+        remain_principal,
+      </if>
+      <if test="remainInterest != null">
+        remain_interest,
+      </if>
+      <if test="remainOthamounts != null">
+        remain_othAmounts,
+      </if>
+      <if test="nextPayDate != null">
+        next_pay_date,
+      </if>
+      <if test="assetsStatus != null">
+        assets_status,
+      </if>
+      <if test="settleReason != null">
+        settle_reason,
+      </if>
+      <if test="currentOverduePrincipal != null">
+        current_overdue_principal,
+      </if>
+      <if test="currentOverdueInterest != null">
+        current_overdue_interest,
+      </if>
+      <if test="currentOverdueFee != null">
+        current_overdue_fee,
+      </if>
+      <if test="currentOverdueDays != null">
+        current_overdue_days,
+      </if>
+      <if test="accumOverdueDays != null">
+        accum_overdue_days,
+      </if>
+      <if test="hisAccumOverdueDays != null">
+        his_accum_overdue_days,
+      </if>
+      <if test="hisOverdueMdays != null">
+        his_overdue_mdays,
+      </if>
+      <if test="currentOverduePeriod != null">
+        current_overdue_period,
+      </if>
+      <if test="accumOverduePeriod != null">
+        accum_overdue_period,
+      </if>
+      <if test="hisOverdueMperiods != null">
+        his_overdue_mperiods,
+      </if>
+      <if test="hisOverdueMprincipal != null">
+        his_overdue_mprincipal,
+      </if>
+      <if test="extraInfo != null">
+        extra_info,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="loanTotalAmount != null">
+        loan_total_amount,
+      </if>
+      <if test="loanInterestRate != null">
+        loan_interest_rate,
+      </if>
+      <if test="periods != null">
+        periods,
+      </if>
+      <if test="recoveredTotalAmount != null">
+        recovered_total_amount,
+      </if>
+      <if test="relPrincipal != null">
+        rel_principal,
+      </if>
+      <if test="relInterest != null">
+        rel_interest,
+      </if>
+      <if test="relFee != null">
+        rel_fee,
+      </if>
+      <if test="currentContinuityOverdays != null">
+        current_continuity_overdays,
+      </if>
+      <if test="maxSingleOverduedays != null">
+        max_single_overduedays,
+      </if>
+      <if test="maxContinuityOverdays != null">
+        max_continuity_overdays,
+      </if>
+      <if test="loanSettlementDate != null">
+        loan_settlement_date,
+      </if>
+      <if test="lossPrincipal != null">
+        loss_principal,
+      </if>
+      <if test="remainPenalty != null">
+        remain_penalty,
+      </if>
+      <if test="totalRelAmount != null">
+        total_rel_amount,
+      </if>
+      <if test="totalRelPrincipal != null">
+        total_rel_principal,
+      </if>
+      <if test="totalRelInterest != null">
+        total_rel_interest,
+      </if>
+      <if test="totalRelFee != null">
+        total_rel_fee,
+      </if>
+      <if test="totalRelPenalty != null">
+        total_rel_penalty,
+      </if>
+      <if test="relPenalty != null">
+        rel_penalty,
+      </if>
+      <if test="currPeriod != null">
+        curr_period,
+      </if>
+      <if test="firstTermOverdue != null">
+        first_term_overdue,
+      </if>
+      <if test="accumOverduePrincipal != null">
+        accum_overdue_principal,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyId != null">
+        #{agencyId,jdbcType=VARCHAR},
+      </if>
+      <if test="assetId != null">
+        #{assetId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountDate != null">
+        #{accountDate,jdbcType=DATE},
+      </if>
+      <if test="repayedperiod != null">
+        #{repayedperiod,jdbcType=INTEGER},
+      </if>
+      <if test="remainPeriod != null">
+        #{remainPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="remainPrincipal != null">
+        #{remainPrincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="remainInterest != null">
+        #{remainInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="remainOthamounts != null">
+        #{remainOthamounts,jdbcType=DECIMAL},
+      </if>
+      <if test="nextPayDate != null">
+        #{nextPayDate,jdbcType=DATE},
+      </if>
+      <if test="assetsStatus != null">
+        #{assetsStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="settleReason != null">
+        #{settleReason,jdbcType=VARCHAR},
+      </if>
+      <if test="currentOverduePrincipal != null">
+        #{currentOverduePrincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="currentOverdueInterest != null">
+        #{currentOverdueInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="currentOverdueFee != null">
+        #{currentOverdueFee,jdbcType=DECIMAL},
+      </if>
+      <if test="currentOverdueDays != null">
+        #{currentOverdueDays,jdbcType=INTEGER},
+      </if>
+      <if test="accumOverdueDays != null">
+        #{accumOverdueDays,jdbcType=INTEGER},
+      </if>
+      <if test="hisAccumOverdueDays != null">
+        #{hisAccumOverdueDays,jdbcType=INTEGER},
+      </if>
+      <if test="hisOverdueMdays != null">
+        #{hisOverdueMdays,jdbcType=INTEGER},
+      </if>
+      <if test="currentOverduePeriod != null">
+        #{currentOverduePeriod,jdbcType=INTEGER},
+      </if>
+      <if test="accumOverduePeriod != null">
+        #{accumOverduePeriod,jdbcType=INTEGER},
+      </if>
+      <if test="hisOverdueMperiods != null">
+        #{hisOverdueMperiods,jdbcType=INTEGER},
+      </if>
+      <if test="hisOverdueMprincipal != null">
+        #{hisOverdueMprincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="extraInfo != null">
+        #{extraInfo,jdbcType=CHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loanTotalAmount != null">
+        #{loanTotalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="loanInterestRate != null">
+        #{loanInterestRate,jdbcType=DECIMAL},
+      </if>
+      <if test="periods != null">
+        #{periods,jdbcType=INTEGER},
+      </if>
+      <if test="recoveredTotalAmount != null">
+        #{recoveredTotalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="relPrincipal != null">
+        #{relPrincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="relInterest != null">
+        #{relInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="relFee != null">
+        #{relFee,jdbcType=DECIMAL},
+      </if>
+      <if test="currentContinuityOverdays != null">
+        #{currentContinuityOverdays,jdbcType=INTEGER},
+      </if>
+      <if test="maxSingleOverduedays != null">
+        #{maxSingleOverduedays,jdbcType=INTEGER},
+      </if>
+      <if test="maxContinuityOverdays != null">
+        #{maxContinuityOverdays,jdbcType=INTEGER},
+      </if>
+      <if test="loanSettlementDate != null">
+        #{loanSettlementDate,jdbcType=DATE},
+      </if>
+      <if test="lossPrincipal != null">
+        #{lossPrincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="remainPenalty != null">
+        #{remainPenalty,jdbcType=DECIMAL},
+      </if>
+      <if test="totalRelAmount != null">
+        #{totalRelAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="totalRelPrincipal != null">
+        #{totalRelPrincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="totalRelInterest != null">
+        #{totalRelInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="totalRelFee != null">
+        #{totalRelFee,jdbcType=DECIMAL},
+      </if>
+      <if test="totalRelPenalty != null">
+        #{totalRelPenalty,jdbcType=DECIMAL},
+      </if>
+      <if test="relPenalty != null">
+        #{relPenalty,jdbcType=DECIMAL},
+      </if>
+      <if test="currPeriod != null">
+        #{currPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="firstTermOverdue != null">
+        #{firstTermOverdue,jdbcType=VARCHAR},
+      </if>
+      <if test="accumOverduePrincipal != null">
+        #{accumOverduePrincipal,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.weshare.assertstatus.entity.AssetCheck">
+    update t_asset_check
+    <set>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyId != null">
+        agency_id = #{agencyId,jdbcType=VARCHAR},
+      </if>
+      <if test="assetId != null">
+        asset_id = #{assetId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountDate != null">
+        account_date = #{accountDate,jdbcType=DATE},
+      </if>
+      <if test="repayedperiod != null">
+        repayedPeriod = #{repayedperiod,jdbcType=INTEGER},
+      </if>
+      <if test="remainPeriod != null">
+        remain_period = #{remainPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="remainPrincipal != null">
+        remain_principal = #{remainPrincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="remainInterest != null">
+        remain_interest = #{remainInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="remainOthamounts != null">
+        remain_othAmounts = #{remainOthamounts,jdbcType=DECIMAL},
+      </if>
+      <if test="nextPayDate != null">
+        next_pay_date = #{nextPayDate,jdbcType=DATE},
+      </if>
+      <if test="assetsStatus != null">
+        assets_status = #{assetsStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="settleReason != null">
+        settle_reason = #{settleReason,jdbcType=VARCHAR},
+      </if>
+      <if test="currentOverduePrincipal != null">
+        current_overdue_principal = #{currentOverduePrincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="currentOverdueInterest != null">
+        current_overdue_interest = #{currentOverdueInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="currentOverdueFee != null">
+        current_overdue_fee = #{currentOverdueFee,jdbcType=DECIMAL},
+      </if>
+      <if test="currentOverdueDays != null">
+        current_overdue_days = #{currentOverdueDays,jdbcType=INTEGER},
+      </if>
+      <if test="accumOverdueDays != null">
+        accum_overdue_days = #{accumOverdueDays,jdbcType=INTEGER},
+      </if>
+      <if test="hisAccumOverdueDays != null">
+        his_accum_overdue_days = #{hisAccumOverdueDays,jdbcType=INTEGER},
+      </if>
+      <if test="hisOverdueMdays != null">
+        his_overdue_mdays = #{hisOverdueMdays,jdbcType=INTEGER},
+      </if>
+      <if test="currentOverduePeriod != null">
+        current_overdue_period = #{currentOverduePeriod,jdbcType=INTEGER},
+      </if>
+      <if test="accumOverduePeriod != null">
+        accum_overdue_period = #{accumOverduePeriod,jdbcType=INTEGER},
+      </if>
+      <if test="hisOverdueMperiods != null">
+        his_overdue_mperiods = #{hisOverdueMperiods,jdbcType=INTEGER},
+      </if>
+      <if test="hisOverdueMprincipal != null">
+        his_overdue_mprincipal = #{hisOverdueMprincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="extraInfo != null">
+        extra_info = #{extraInfo,jdbcType=CHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loanTotalAmount != null">
+        loan_total_amount = #{loanTotalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="loanInterestRate != null">
+        loan_interest_rate = #{loanInterestRate,jdbcType=DECIMAL},
+      </if>
+      <if test="periods != null">
+        periods = #{periods,jdbcType=INTEGER},
+      </if>
+      <if test="recoveredTotalAmount != null">
+        recovered_total_amount = #{recoveredTotalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="relPrincipal != null">
+        rel_principal = #{relPrincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="relInterest != null">
+        rel_interest = #{relInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="relFee != null">
+        rel_fee = #{relFee,jdbcType=DECIMAL},
+      </if>
+      <if test="currentContinuityOverdays != null">
+        current_continuity_overdays = #{currentContinuityOverdays,jdbcType=INTEGER},
+      </if>
+      <if test="maxSingleOverduedays != null">
+        max_single_overduedays = #{maxSingleOverduedays,jdbcType=INTEGER},
+      </if>
+      <if test="maxContinuityOverdays != null">
+        max_continuity_overdays = #{maxContinuityOverdays,jdbcType=INTEGER},
+      </if>
+      <if test="loanSettlementDate != null">
+        loan_settlement_date = #{loanSettlementDate,jdbcType=DATE},
+      </if>
+      <if test="lossPrincipal != null">
+        loss_principal = #{lossPrincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="remainPenalty != null">
+        remain_penalty = #{remainPenalty,jdbcType=DECIMAL},
+      </if>
+      <if test="totalRelAmount != null">
+        total_rel_amount = #{totalRelAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="totalRelPrincipal != null">
+        total_rel_principal = #{totalRelPrincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="totalRelInterest != null">
+        total_rel_interest = #{totalRelInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="totalRelFee != null">
+        total_rel_fee = #{totalRelFee,jdbcType=DECIMAL},
+      </if>
+      <if test="totalRelPenalty != null">
+        total_rel_penalty = #{totalRelPenalty,jdbcType=DECIMAL},
+      </if>
+      <if test="relPenalty != null">
+        rel_penalty = #{relPenalty,jdbcType=DECIMAL},
+      </if>
+      <if test="currPeriod != null">
+        curr_period = #{currPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="firstTermOverdue != null">
+        first_term_overdue = #{firstTermOverdue,jdbcType=VARCHAR},
+      </if>
+      <if test="accumOverduePrincipal != null">
+        accum_overdue_principal = #{accumOverduePrincipal,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.weshare.assertstatus.entity.AssetCheck">
+    update t_asset_check
+    set project_id = #{projectId,jdbcType=VARCHAR},
+      agency_id = #{agencyId,jdbcType=VARCHAR},
+      asset_id = #{assetId,jdbcType=VARCHAR},
+      account_date = #{accountDate,jdbcType=DATE},
+      repayedPeriod = #{repayedperiod,jdbcType=INTEGER},
+      remain_period = #{remainPeriod,jdbcType=INTEGER},
+      remain_principal = #{remainPrincipal,jdbcType=DECIMAL},
+      remain_interest = #{remainInterest,jdbcType=DECIMAL},
+      remain_othAmounts = #{remainOthamounts,jdbcType=DECIMAL},
+      next_pay_date = #{nextPayDate,jdbcType=DATE},
+      assets_status = #{assetsStatus,jdbcType=VARCHAR},
+      settle_reason = #{settleReason,jdbcType=VARCHAR},
+      current_overdue_principal = #{currentOverduePrincipal,jdbcType=DECIMAL},
+      current_overdue_interest = #{currentOverdueInterest,jdbcType=DECIMAL},
+      current_overdue_fee = #{currentOverdueFee,jdbcType=DECIMAL},
+      current_overdue_days = #{currentOverdueDays,jdbcType=INTEGER},
+      accum_overdue_days = #{accumOverdueDays,jdbcType=INTEGER},
+      his_accum_overdue_days = #{hisAccumOverdueDays,jdbcType=INTEGER},
+      his_overdue_mdays = #{hisOverdueMdays,jdbcType=INTEGER},
+      current_overdue_period = #{currentOverduePeriod,jdbcType=INTEGER},
+      accum_overdue_period = #{accumOverduePeriod,jdbcType=INTEGER},
+      his_overdue_mperiods = #{hisOverdueMperiods,jdbcType=INTEGER},
+      his_overdue_mprincipal = #{hisOverdueMprincipal,jdbcType=DECIMAL},
+      extra_info = #{extraInfo,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      loan_total_amount = #{loanTotalAmount,jdbcType=DECIMAL},
+      loan_interest_rate = #{loanInterestRate,jdbcType=DECIMAL},
+      periods = #{periods,jdbcType=INTEGER},
+      recovered_total_amount = #{recoveredTotalAmount,jdbcType=DECIMAL},
+      rel_principal = #{relPrincipal,jdbcType=DECIMAL},
+      rel_interest = #{relInterest,jdbcType=DECIMAL},
+      rel_fee = #{relFee,jdbcType=DECIMAL},
+      current_continuity_overdays = #{currentContinuityOverdays,jdbcType=INTEGER},
+      max_single_overduedays = #{maxSingleOverduedays,jdbcType=INTEGER},
+      max_continuity_overdays = #{maxContinuityOverdays,jdbcType=INTEGER},
+      loan_settlement_date = #{loanSettlementDate,jdbcType=DATE},
+      loss_principal = #{lossPrincipal,jdbcType=DECIMAL},
+      remain_penalty = #{remainPenalty,jdbcType=DECIMAL},
+      total_rel_amount = #{totalRelAmount,jdbcType=DECIMAL},
+      total_rel_principal = #{totalRelPrincipal,jdbcType=DECIMAL},
+      total_rel_interest = #{totalRelInterest,jdbcType=DECIMAL},
+      total_rel_fee = #{totalRelFee,jdbcType=DECIMAL},
+      total_rel_penalty = #{totalRelPenalty,jdbcType=DECIMAL},
+      rel_penalty = #{relPenalty,jdbcType=DECIMAL},
+      curr_period = #{currPeriod,jdbcType=INTEGER},
+      first_term_overdue = #{firstTermOverdue,jdbcType=VARCHAR},
+      accum_overdue_principal = #{accumOverduePrincipal,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="selectLessDate" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_asset_check
+        <where>
+            <if test="projectId != null">
+                project_id = #{projectId,jdbcType=VARCHAR}
+            </if>
+            <if test="assetId != null">
+                and asset_id = #{assetId,jdbcType=VARCHAR}
+            </if>
+            <if test="accountDate != null">
+                and account_date = #{accountDate}
+            </if>
+        </where>
+        limit 1
+    </select>
+
+    <select id="selectOverDueList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_asset_check
+        <where>
+            <if test="projectId != null">
+                project_id = #{projectId,jdbcType=VARCHAR}
+            </if>
+            <if test="assetId != null">
+                and asset_id = #{assetId,jdbcType=VARCHAR}
+            </if>
+            <if test="assetsStatus != null">
+                and assets_status = #{assetsStatus,jdbcType=VARCHAR}
+            </if>
+            <if test="accountDate != null">
+                and account_date &lt; #{accountDate}
+            </if>
+        </where>
+    </select>
+
+    <select id="fingByUnion" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_asset_check
+        <where>
+            <if test="projectId != null">
+                project_id = #{projectId,jdbcType=VARCHAR}
+            </if>
+            <if test="assetId != null">
+                and asset_id = #{assetId,jdbcType=VARCHAR}
+            </if>
+            <if test="accountDate != null">
+                and account_date = #{accountDate}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByCompositeKeys" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_asset_check
+        <where>
+            <if test="assetId!=null and assetId!=''">
+                asset_Id = #{assetId}
+            </if>
+            <if test="agencyId!=null and agencyId!=''">
+                AND agency_id = #{agencyId}
+            </if>
+            <if test="projectId!=null and projectId!=''">
+                AND project_id = #{projectId}
+            </if>
+
+        </where>
+        order by account_date
+    </select>
+
+    <select id="selectByProjectIdAndAccountDate" resultType="com.weshare.assertstatus.entity.AssetCheck">
+      select a.project_id as projectId,a.agency_id AS agencyId,a.asset_id as  assetId,'NO' AS changeRepayPlan, '' AS changeDate,
+        l.loan_total_amount as loanTotalAmount,l.loan_interest_rate as loanInterestRate,
+        l.periods as periods,a.repayedPeriod as repayedPeriod,
+        a.remain_period as remainPeriod,a.remain_principal as remainPrincipal,a.remain_interest as remainInterest,
+        a.remain_othAmounts as remainOthamounts,
+        a.next_pay_date as nextPayDate,a.assets_status as assetsStatus,ifnull(a.settle_reason,'') as settleReason,
+        a.current_overdue_principal as currentOverduePrincipal,a.current_overdue_interest as currentOverdueInterest,
+        a.current_overdue_fee as currentOverdueFee,a.current_overdue_days as currentOverdueDays,
+        a.accum_overdue_days AS accumOverdueDays,a.his_accum_overdue_days as hisAccumOverdueDays,a.his_overdue_mdays AS hisOverdueMdays,
+        a.current_overdue_period AS currentOverduePeriod,a.accum_overdue_period AS accumOverduePeriod,a.his_overdue_mperiods AS hisOverdueMperiods,
+        a.his_overdue_mprincipal AS hisOverdueMprincipal
+        from t_asset_check a LEFT JOIN t_loan_contract_info l ON a.asset_id = l.asset_id
+        <where>
+            <if test="projectId != null and projectId != ''">
+                a.project_id = #{projectId}
+            </if>
+            <if test="accountDate != null">
+                and a.account_date = #{accountDate}
+            </if>
+        </where>
+      order by a.asset_id,a.account_date
+      limit #{start},#{end}
+    </select>
+
+    <select id="countByProjectIdAndAccountDate" resultType="int">
+        select count(1)
+        from t_asset_check
+        <where>
+            <if test="projectId != null and projectId != ''">
+                project_id = #{projectId}
+            </if>
+            <if test="accountDate != null">
+                and account_date = #{accountDate}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectAssetCheckByProject" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_asset_check
+        where project_id = #{projectId}
+    </select>
+
+
+    <delete id="deleteByAccountDate" parameterType="map">
+        delete from t_asset_check where asset_id = #{assetId} and project_id =#{projectId} and account_date >= #{accountDate}
+    </delete>
+
+    <select id="selectMaxAccountDate" parameterType="string" resultType="string">
+        select max(account_date) from t_asset_check where project_id = #{projectId}
+    </select>
+
+    <select id="selectMaxAccountDateByAssetId" parameterType="string" resultType="string">
+        select max(account_date) from t_asset_check where project_id = #{projectId} and asset_id =  #{assetId}
+    </select>
+
+
+    <select id="selectClosedAsset" parameterType="string" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_asset_check
+        <where>
+
+            <if test="projectId != null and projectId != ''">
+                project_id = #{projectId}
+            </if>
+            <if test="assetId!=null and assetId!=''">
+                AND asset_Id = #{assetId}
+            </if>
+            <if test="agencyId!=null and agencyId!=''">
+                AND agency_id = #{agencyId}
+            </if>
+            <if test="accountDate != null">
+                and account_date &lt; #{accountDate}
+            </if>
+            <if test="assetStatus != null">
+                and assets_status = #{assetStatus}
+            </if>
+        </where>
+      order by account_date limit 1
+    </select>
+
+
+    <select id="selectByKeysAndAccountDate" parameterType="string" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_asset_check
+        <where>
+
+            <if test="projectId != null and projectId != ''">
+                project_id = #{projectId}
+            </if>
+            <if test="assetId!=null and assetId!=''">
+                AND asset_Id = #{assetId}
+            </if>
+            <if test="agencyId!=null and agencyId!=''">
+                AND agency_id = #{agencyId}
+            </if>
+            <if test="accountDate != null">
+                and account_date = #{accountDate}
+            </if>
+        </where>
+    </select>
+    
+    <select id="selectlastDayOverDueList" resultMap="BaseResultMap">
+	    SELECT
+		t2.* 
+	FROM
+		t_asset_check t1
+		INNER JOIN t_asset_check t2 ON t1.assets_status = "逾期" 
+		AND t2.assets_status = "已结清" 
+	WHERE 1 = 1
+        and t1.project_id = #{projectId,jdbcType=VARCHAR}
+		AND t1.project_id = t2.project_id 
+        and t2.account_date = #{accountDate}
+		AND DATE_ADD( t1.account_date, INTERVAL 1 DAY ) = t2.account_date 
+		AND t1.asset_id = t2.asset_id
+    </select>
+    
+    <select id="selectListByCondition" parameterType="string" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_asset_check
+        <where>
+
+            <if test="projectId != null and projectId != ''">
+                project_id = #{projectId}
+            </if>
+            <if test="accountDate != null">
+                and account_date = #{accountDate}
+            </if>
+            <if test="assetStatus != null">
+                and assets_status = #{assetStatus}
+            </if>
+        </where>
+    </select>
+</mapper>

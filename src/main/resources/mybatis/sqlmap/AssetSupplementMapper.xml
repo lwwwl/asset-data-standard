@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sershare.asset.data.standard.mapper.AssetSupplementMapper">
+  <resultMap id="BaseResultMap" type="com.weshare.assertstatus.entity.AssetSupplement">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="project_id" jdbcType="VARCHAR" property="projectId" />
+    <result column="agency_id" jdbcType="VARCHAR" property="agencyId" />
+    <result column="asset_id" jdbcType="VARCHAR" property="assetId" />
+    <result column="tradeType" jdbcType="VARCHAR" property="tradetype" />
+    <result column="tradeReason" jdbcType="VARCHAR" property="tradereason" />
+    <result column="tradeDate" jdbcType="VARCHAR" property="tradedate" />
+    <result column="trade_tol_amounts" jdbcType="DECIMAL" property="tradeTolAmounts" />
+    <result column="principal" jdbcType="DECIMAL" property="principal" />
+    <result column="interest" jdbcType="DECIMAL" property="interest" />
+    <result column="punish_interest" jdbcType="DECIMAL" property="punishInterest" />
+    <result column="oth_fee" jdbcType="DECIMAL" property="othFee" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, project_id, agency_id, asset_id, tradeType, tradeReason, tradeDate, trade_tol_amounts, 
+    principal, interest, punish_interest, oth_fee, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_asset_supplement
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_asset_supplement
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.weshare.assertstatus.entity.AssetSupplement">
+    insert into t_asset_supplement ( project_id, agency_id,
+      asset_id, tradeType, tradeReason, 
+      tradeDate, trade_tol_amounts, principal, 
+      interest, punish_interest, oth_fee, 
+      create_time, update_time)
+    values ( #{projectId,jdbcType=VARCHAR}, #{agencyId,jdbcType=VARCHAR},
+      #{assetId,jdbcType=VARCHAR}, #{tradetype,jdbcType=VARCHAR}, #{tradereason,jdbcType=VARCHAR},
+      #{tradedate,jdbcType=VARCHAR}, #{tradeTolAmounts,jdbcType=DECIMAL}, #{principal,jdbcType=DECIMAL}, 
+      #{interest,jdbcType=DECIMAL}, #{punishInterest,jdbcType=DECIMAL}, #{othFee,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.weshare.assertstatus.entity.AssetSupplement">
+    insert into t_asset_supplement
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="agencyId != null">
+        agency_id,
+      </if>
+      <if test="assetId != null">
+        asset_id,
+      </if>
+      <if test="tradetype != null">
+        tradeType,
+      </if>
+      <if test="tradereason != null">
+        tradeReason,
+      </if>
+      <if test="tradedate != null">
+        tradeDate,
+      </if>
+      <if test="tradeTolAmounts != null">
+        trade_tol_amounts,
+      </if>
+      <if test="principal != null">
+        principal,
+      </if>
+      <if test="interest != null">
+        interest,
+      </if>
+      <if test="punishInterest != null">
+        punish_interest,
+      </if>
+      <if test="othFee != null">
+        oth_fee,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyId != null">
+        #{agencyId,jdbcType=VARCHAR},
+      </if>
+      <if test="assetId != null">
+        #{assetId,jdbcType=VARCHAR},
+      </if>
+      <if test="tradetype != null">
+        #{tradetype,jdbcType=VARCHAR},
+      </if>
+      <if test="tradereason != null">
+        #{tradereason,jdbcType=VARCHAR},
+      </if>
+      <if test="tradedate != null">
+        #{tradedate,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeTolAmounts != null">
+        #{tradeTolAmounts,jdbcType=DECIMAL},
+      </if>
+      <if test="principal != null">
+        #{principal,jdbcType=DECIMAL},
+      </if>
+      <if test="interest != null">
+        #{interest,jdbcType=DECIMAL},
+      </if>
+      <if test="punishInterest != null">
+        #{punishInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="othFee != null">
+        #{othFee,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.weshare.assertstatus.entity.AssetSupplement">
+    update t_asset_supplement
+    <set>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyId != null">
+        agency_id = #{agencyId,jdbcType=VARCHAR},
+      </if>
+      <if test="assetId != null">
+        asset_id = #{assetId,jdbcType=VARCHAR},
+      </if>
+      <if test="tradetype != null">
+        tradeType = #{tradetype,jdbcType=VARCHAR},
+      </if>
+      <if test="tradereason != null">
+        tradeReason = #{tradereason,jdbcType=VARCHAR},
+      </if>
+      <if test="tradedate != null">
+        tradeDate = #{tradedate,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeTolAmounts != null">
+        trade_tol_amounts = #{tradeTolAmounts,jdbcType=DECIMAL},
+      </if>
+      <if test="principal != null">
+        principal = #{principal,jdbcType=DECIMAL},
+      </if>
+      <if test="interest != null">
+        interest = #{interest,jdbcType=DECIMAL},
+      </if>
+      <if test="punishInterest != null">
+        punish_interest = #{punishInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="othFee != null">
+        oth_fee = #{othFee,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.weshare.assertstatus.entity.AssetSupplement">
+    update t_asset_supplement
+    set project_id = #{projectId,jdbcType=VARCHAR},
+      agency_id = #{agencyId,jdbcType=VARCHAR},
+      asset_id = #{assetId,jdbcType=VARCHAR},
+      tradeType = #{tradetype,jdbcType=VARCHAR},
+      tradeReason = #{tradereason,jdbcType=VARCHAR},
+      tradeDate = #{tradedate,jdbcType=VARCHAR},
+      trade_tol_amounts = #{tradeTolAmounts,jdbcType=DECIMAL},
+      principal = #{principal,jdbcType=DECIMAL},
+      interest = #{interest,jdbcType=DECIMAL},
+      punish_interest = #{punishInterest,jdbcType=DECIMAL},
+      oth_fee = #{othFee,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByUnionKey" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from t_asset_supplement
+    <where>
+      <if test="assetId!=null and assetId!=''">
+        asset_Id = #{assetId}
+      </if>
+      <if test="agencyId!=null and agencyId!=''">
+        AND agency_id = #{agencyId}
+      </if>
+      <if test="projectId!=null and projectId!=''">
+        AND project_id = #{projectId}
+      </if>
+      <if test="tradedate != null">
+        AND tradeDate = #{tradedate}
+      </if>
+    </where>
+  </select>
+
+
+  <select id="selectByCompositeKeys" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from t_asset_supplement
+    <where>
+      <if test="assetId!=null and assetId!=''">
+        asset_Id = #{assetId}
+      </if>
+      <if test="agencyId!=null and agencyId!=''">
+        AND agency_id = #{agencyId}
+      </if>
+      <if test="projectId!=null and projectId!=''">
+        AND project_id = #{projectId}
+      </if>
+      <if test="tradedate != null">
+        AND tradeDate &lt;= #{tradedate}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByUpdateTime" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from t_asset_supplement
+    where project_id = #{projectId,jdbcType=VARCHAR} and DATE_FORMAT(update_time,'%Y-%m-%d') = #{date}
+  </select>
+</mapper>

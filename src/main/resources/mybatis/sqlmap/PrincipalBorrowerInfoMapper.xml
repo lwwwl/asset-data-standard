@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sershare.asset.data.standard.mapper.PrincipalBorrowerInfoMapper">
+  <resultMap id="BaseResultMap" type="com.sershare.asset.data.standard.entity.PrincipalBorrowerInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="project_id" jdbcType="VARCHAR" property="projectId" />
+    <result column="agency_id" jdbcType="VARCHAR" property="agencyId" />
+    <result column="asset_id" jdbcType="VARCHAR" property="assetId" />
+    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
+    <result column="document_num" jdbcType="VARCHAR" property="documentNum" />
+    <result column="phone_num" jdbcType="VARCHAR" property="phoneNum" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="marital_status" jdbcType="VARCHAR" property="maritalStatus" />
+    <result column="degree" jdbcType="VARCHAR" property="degree" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="extra_info" jdbcType="CHAR" property="extraInfo" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="ecif_no" jdbcType="VARCHAR" property="ecifNo" />
+    <result column="card_no" jdbcType="VARCHAR" property="cardNo" />
+    <result column="phone_no" jdbcType="VARCHAR" property="phoneNo" />
+    <result column="imei" jdbcType="VARCHAR" property="imei" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="annual_income" jdbcType="DECIMAL" property="annualIncome" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, project_id, agency_id, asset_id, customer_name, document_num, phone_num, age,
+    sex, marital_status, degree, province, city, address, extra_info, create_time, update_time,
+    ecif_no, card_no, phone_no, imei, education, annual_income
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_principal_borrower_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_principal_borrower_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.weshare.assertstatus.entity.PrincipalBorrowerInfo">
+    insert into t_principal_borrower_info (id, project_id, agency_id,
+      asset_id, customer_name, document_num,
+      phone_num, age, sex,
+      marital_status, degree, province,
+      city, address, extra_info,
+      create_time, update_time, ecif_no,
+      card_no, phone_no, imei,
+      education, annual_income)
+    values (#{id,jdbcType=INTEGER}, #{projectId,jdbcType=VARCHAR}, #{agencyId,jdbcType=VARCHAR},
+      #{assetId,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, #{documentNum,jdbcType=VARCHAR},
+      #{phoneNum,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{sex,jdbcType=VARCHAR},
+      #{maritalStatus,jdbcType=VARCHAR}, #{degree,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR},
+      #{city,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{extraInfo,jdbcType=CHAR},
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{ecifNo,jdbcType=VARCHAR},
+      #{cardNo,jdbcType=VARCHAR}, #{phoneNo,jdbcType=VARCHAR}, #{imei,jdbcType=VARCHAR},
+      #{education,jdbcType=VARCHAR}, #{annualIncome,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.weshare.assertstatus.entity.PrincipalBorrowerInfo">
+    insert into t_principal_borrower_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="agencyId != null">
+        agency_id,
+      </if>
+      <if test="assetId != null">
+        asset_id,
+      </if>
+      <if test="customerName != null">
+        customer_name,
+      </if>
+      <if test="documentNum != null">
+        document_num,
+      </if>
+      <if test="phoneNum != null">
+        phone_num,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="maritalStatus != null">
+        marital_status,
+      </if>
+      <if test="degree != null">
+        degree,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="extraInfo != null">
+        extra_info,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="ecifNo != null">
+        ecif_no,
+      </if>
+      <if test="cardNo != null">
+        card_no,
+      </if>
+      <if test="phoneNo != null">
+        phone_no,
+      </if>
+      <if test="imei != null">
+        imei,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="annualIncome != null">
+        annual_income,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyId != null">
+        #{agencyId,jdbcType=VARCHAR},
+      </if>
+      <if test="assetId != null">
+        #{assetId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="documentNum != null">
+        #{documentNum,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNum != null">
+        #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalStatus != null">
+        #{maritalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="extraInfo != null">
+        #{extraInfo,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ecifNo != null">
+        #{ecifNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNo != null">
+        #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNo != null">
+        #{phoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="imei != null">
+        #{imei,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="annualIncome != null">
+        #{annualIncome,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.weshare.assertstatus.entity.PrincipalBorrowerInfo">
+    update t_principal_borrower_info
+    <set>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyId != null">
+        agency_id = #{agencyId,jdbcType=VARCHAR},
+      </if>
+      <if test="assetId != null">
+        asset_id = #{assetId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="documentNum != null">
+        document_num = #{documentNum,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNum != null">
+        phone_num = #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalStatus != null">
+        marital_status = #{maritalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        degree = #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="extraInfo != null">
+        extra_info = #{extraInfo,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ecifNo != null">
+        ecif_no = #{ecifNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNo != null">
+        card_no = #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNo != null">
+        phone_no = #{phoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="imei != null">
+        imei = #{imei,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="annualIncome != null">
+        annual_income = #{annualIncome,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.weshare.assertstatus.entity.PrincipalBorrowerInfo">
+    update t_principal_borrower_info
+    set project_id = #{projectId,jdbcType=VARCHAR},
+      agency_id = #{agencyId,jdbcType=VARCHAR},
+      asset_id = #{assetId,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      document_num = #{documentNum,jdbcType=VARCHAR},
+      phone_num = #{phoneNum,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=VARCHAR},
+      marital_status = #{maritalStatus,jdbcType=VARCHAR},
+      degree = #{degree,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      extra_info = #{extraInfo,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      ecif_no = #{ecifNo,jdbcType=VARCHAR},
+      card_no = #{cardNo,jdbcType=VARCHAR},
+      phone_no = #{phoneNo,jdbcType=VARCHAR},
+      imei = #{imei,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      annual_income = #{annualIncome,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByCompositeKeys" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from t_principal_borrower_info
+    <where>
+      <if test="assetId!=null and assetId!=''">
+        asset_Id = #{assetId}
+      </if>
+      <if test="agencyId!=null and agencyId!=''">
+        AND agency_id = #{agencyId}
+      </if>
+      <if test="projectId!=null and projectId!=''">
+        AND project_id = #{projectId}
+      </if>
+
+    </where>
+  </select>
+
+  <select id="selectByUnionKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from t_principal_borrower_info
+    <trim prefix="WHERE (" suffix=")" prefixOverrides="and |or ">
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=VARCHAR}
+      </if>
+      <if test="assetId != null">
+        and asset_id = #{assetId,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </select>
+
+  <delete id="deleteByCompositeKeys">
+    delete from t_principal_borrower_info where project_id = #{projectId} and agency_id = #{agencyId} and asset_id = #{assetId}
+  </delete>
+
+  <select id="selectExtraInfoByCardNo" parameterType="java.lang.String" resultType="java.lang.String">
+    select extra_info from t_principal_borrower_info where document_num = #{cardNo} limit 1
+  </select>
+
+  <select id="selectCustomerInfoByEcifNo" resultType="java.util.Map">
+    select customer_name, document_num, phone_num from t_principal_borrower_info where ecif_no is null
+  </select>
+
+  <update id="updateEcifNoByCardNo" parameterType="java.lang.String">
+    update t_principal_borrower_info set ecif_no = #{ecifNo}, card_no = #{ecifCardNo}, phone_no = #{ecifPhoneNo} where document_num = #{cardNo}
+  </update>
+
+  <select id="selectByProject" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from t_principal_borrower_info where project_id = #{projectId}
+  </select>
+
+  <select id="selectExtraInfoBySign" resultType="java.util.Map">
+    select id, extra_info from t_principal_borrower_info where processed is null
+  </select>
+
+  <update id="updateSignById">
+    update t_principal_borrower_info set education = #{education}, annual_income = #{annualIncome}, processed = 1 where id = #{Id}
+  </update>
+
+  <select id="selectExtraInfoByAssetIdAndSign" parameterType="java.lang.String" resultType="java.util.Map">
+    select id, extra_info from t_principal_borrower_info where asset_id = #{assetId} and processed is null
+  </select>
+
+  <select id="selectCustomerInfoByAssetIdAndEcifNo" parameterType="java.lang.String" resultType="java.util.Map">
+    select customer_name, document_num, phone_num from t_principal_borrower_info where asset_id = #{assetId} and ecif_no is null
+  </select>
+</mapper>

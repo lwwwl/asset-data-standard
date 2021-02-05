@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sershare.asset.data.standard.mapper.ContactPersonInfoMapper">
+  <resultMap id="BaseResultMap" type="com.weshare.assertstatus.entity.ContactPersonInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="project_id" jdbcType="VARCHAR" property="projectId" />
+    <result column="agency_id" jdbcType="VARCHAR" property="agencyId" />
+    <result column="asset_id" jdbcType="VARCHAR" property="assetId" />
+    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
+    <result column="document_num" jdbcType="VARCHAR" property="documentNum" />
+    <result column="phone_num" jdbcType="VARCHAR" property="phoneNum" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="mainborrower_relationship" jdbcType="INTEGER" property="mainborrowerRelationship" />
+    <result column="occupation" jdbcType="VARCHAR" property="occupation" />
+    <result column="work_status" jdbcType="INTEGER" property="workStatus" />
+    <result column="annual_income" jdbcType="DECIMAL" property="annualIncome" />
+    <result column="communication_address" jdbcType="VARCHAR" property="communicationAddress" />
+    <result column="unit_address" jdbcType="VARCHAR" property="unitAddress" />
+    <result column="unit_phone_number" jdbcType="VARCHAR" property="unitPhoneNumber" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, project_id, agency_id, asset_id, customer_name, document_num, phone_num, age, 
+    sex, mainborrower_relationship, occupation, work_status, annual_income, communication_address, 
+    unit_address, unit_phone_number, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_contact_person_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_contact_person_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.weshare.assertstatus.entity.ContactPersonInfo">
+    insert into t_contact_person_info ( project_id, agency_id,
+      asset_id, customer_name, document_num, 
+      phone_num, age, sex, 
+      mainborrower_relationship, occupation, work_status, 
+      annual_income, communication_address, unit_address, 
+      unit_phone_number, create_time, update_time
+      )
+    values ( #{projectId,jdbcType=VARCHAR}, #{agencyId,jdbcType=VARCHAR},
+      #{assetId,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, #{documentNum,jdbcType=VARCHAR}, 
+      #{phoneNum,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{sex,jdbcType=VARCHAR},
+      #{mainborrowerRelationship,jdbcType=INTEGER}, #{occupation,jdbcType=VARCHAR}, #{workStatus,jdbcType=INTEGER}, 
+      #{annualIncome,jdbcType=DECIMAL}, #{communicationAddress,jdbcType=VARCHAR}, #{unitAddress,jdbcType=VARCHAR}, 
+      #{unitPhoneNumber,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.weshare.assertstatus.entity.ContactPersonInfo">
+    insert into t_contact_person_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="agencyId != null">
+        agency_id,
+      </if>
+      <if test="assetId != null">
+        asset_id,
+      </if>
+      <if test="customerName != null">
+        customer_name,
+      </if>
+      <if test="documentNum != null">
+        document_num,
+      </if>
+      <if test="phoneNum != null">
+        phone_num,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="mainborrowerRelationship != null">
+        mainborrower_relationship,
+      </if>
+      <if test="occupation != null">
+        occupation,
+      </if>
+      <if test="workStatus != null">
+        work_status,
+      </if>
+      <if test="annualIncome != null">
+        annual_income,
+      </if>
+      <if test="communicationAddress != null">
+        communication_address,
+      </if>
+      <if test="unitAddress != null">
+        unit_address,
+      </if>
+      <if test="unitPhoneNumber != null">
+        unit_phone_number,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyId != null">
+        #{agencyId,jdbcType=VARCHAR},
+      </if>
+      <if test="assetId != null">
+        #{assetId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="documentNum != null">
+        #{documentNum,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNum != null">
+        #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="mainborrowerRelationship != null">
+        #{mainborrowerRelationship,jdbcType=INTEGER},
+      </if>
+      <if test="occupation != null">
+        #{occupation,jdbcType=VARCHAR},
+      </if>
+      <if test="workStatus != null">
+        #{workStatus,jdbcType=INTEGER},
+      </if>
+      <if test="annualIncome != null">
+        #{annualIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="communicationAddress != null">
+        #{communicationAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="unitAddress != null">
+        #{unitAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="unitPhoneNumber != null">
+        #{unitPhoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.weshare.assertstatus.entity.ContactPersonInfo">
+    update t_contact_person_info
+    <set>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyId != null">
+        agency_id = #{agencyId,jdbcType=VARCHAR},
+      </if>
+      <if test="assetId != null">
+        asset_id = #{assetId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="documentNum != null">
+        document_num = #{documentNum,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNum != null">
+        phone_num = #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="mainborrowerRelationship != null">
+        mainborrower_relationship = #{mainborrowerRelationship,jdbcType=INTEGER},
+      </if>
+      <if test="occupation != null">
+        occupation = #{occupation,jdbcType=VARCHAR},
+      </if>
+      <if test="workStatus != null">
+        work_status = #{workStatus,jdbcType=INTEGER},
+      </if>
+      <if test="annualIncome != null">
+        annual_income = #{annualIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="communicationAddress != null">
+        communication_address = #{communicationAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="unitAddress != null">
+        unit_address = #{unitAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="unitPhoneNumber != null">
+        unit_phone_number = #{unitPhoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.weshare.assertstatus.entity.ContactPersonInfo">
+    update t_contact_person_info
+    set project_id = #{projectId,jdbcType=VARCHAR},
+      agency_id = #{agencyId,jdbcType=VARCHAR},
+      asset_id = #{assetId,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      document_num = #{documentNum,jdbcType=VARCHAR},
+      phone_num = #{phoneNum,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=VARCHAR},
+      mainborrower_relationship = #{mainborrowerRelationship,jdbcType=INTEGER},
+      occupation = #{occupation,jdbcType=VARCHAR},
+      work_status = #{workStatus,jdbcType=INTEGER},
+      annual_income = #{annualIncome,jdbcType=DECIMAL},
+      communication_address = #{communicationAddress,jdbcType=VARCHAR},
+      unit_address = #{unitAddress,jdbcType=VARCHAR},
+      unit_phone_number = #{unitPhoneNumber,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="selectByUnionKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_contact_person_info
+    <trim prefix="WHERE ("  suffix=")" prefixOverrides="and |or ">
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=VARCHAR}
+      </if>
+      <if test="assetId != null">
+        and asset_id = #{assetId,jdbcType=VARCHAR}
+      </if>
+      <if test="documentNum != null">
+        and document_num = #{documentNum,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </select>
+
+  <select id="selectByKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_contact_person_info
+    <trim prefix="WHERE ("  suffix=")" prefixOverrides="and |or ">
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=VARCHAR}
+      </if>
+      <if test="assetId != null">
+        and asset_id = #{assetId,jdbcType=VARCHAR}
+      </if>
+      <if test="agencyId != null">
+        and agency_id = #{agencyId,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </select>
+</mapper>

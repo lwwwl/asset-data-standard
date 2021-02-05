@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: asset-data-standard
+  profiles:
+    active: dev

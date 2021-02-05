@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sershare.asset.data.standard.mapper.ApiTaskBeanMapper">
+    <resultMap id="BaseResultMap" type="com.weshare.assertstatus.entity.ApiTaskBean">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="parent_task_id" jdbcType="INTEGER" property="parentTaskId"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="host" jdbcType="VARCHAR" property="host"/>
+        <result column="desc" jdbcType="VARCHAR" property="desc"/>
+        <result column="task_class_name" jdbcType="VARCHAR" property="taskClassName"/>
+        <result column="params" jdbcType="CHAR" property="params"/>
+        <result column="error_msg" jdbcType="VARCHAR" property="errorMsg"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+        <result column="group_batch" jdbcType="VARCHAR" property="groupBatch"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, parent_task_id, status, host, `desc`, task_class_name, params, error_msg, create_time,
+    modify_time,group_batch
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_api_task
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_api_task
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.weshare.assertstatus.entity.ApiTaskBean" useGeneratedKeys="true" keyProperty="id">
+    insert into t_api_task (id, parent_task_id, status, 
+      host, desc, task_class_name, 
+      params, error_msg, create_time, 
+      modify_time,group_batch)
+    values (#{id,jdbcType=INTEGER}, #{parentTaskId,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
+      #{host,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, #{taskClassName,jdbcType=VARCHAR}, 
+      #{params,jdbcType=CHAR}, #{errorMsg,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifyTime,jdbcType=TIMESTAMP},#{groupBatch,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.weshare.assertstatus.entity.ApiTaskBean" useGeneratedKeys="true" keyProperty="id">
+        insert into t_api_task
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="parentTaskId != null">
+                parent_task_id,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="host != null">
+                host,
+            </if>
+            <if test="desc != null">
+                `desc`,
+            </if>
+            <if test="taskClassName != null">
+                task_class_name,
+            </if>
+            <if test="params != null">
+                params,
+            </if>
+            <if test="errorMsg != null">
+                error_msg,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="modifyTime != null">
+                modify_time,
+            </if>
+            <if test="groupBatch != null">
+                group_batch,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="parentTaskId != null">
+                #{parentTaskId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="host != null">
+                #{host,jdbcType=VARCHAR},
+            </if>
+            <if test="desc != null">
+                #{desc,jdbcType=VARCHAR},
+            </if>
+            <if test="taskClassName != null">
+                #{taskClassName,jdbcType=VARCHAR},
+            </if>
+            <if test="params != null">
+                #{params,jdbcType=CHAR},
+            </if>
+            <if test="errorMsg != null">
+                #{errorMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="groupBatch != null">
+                #{groupBatch,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.weshare.assertstatus.entity.ApiTaskBean">
+        update t_api_task
+        <set>
+            <if test="parentTaskId != null">
+                parent_task_id = #{parentTaskId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="host != null">
+                host = #{host,jdbcType=VARCHAR},
+            </if>
+            <if test="desc != null">
+                `desc` = #{desc,jdbcType=VARCHAR},
+            </if>
+            <if test="taskClassName != null">
+                task_class_name = #{taskClassName,jdbcType=VARCHAR},
+            </if>
+            <if test="params != null">
+                params = #{params,jdbcType=CHAR},
+            </if>
+            <if test="errorMsg != null">
+                error_msg = #{errorMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER} and status &lt;&gt; #{status}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.weshare.assertstatus.entity.ApiTaskBean">
+    update t_api_task
+    set parent_task_id = #{parentTaskId,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      host = #{host,jdbcType=VARCHAR},
+      `desc` = #{desc,jdbcType=VARCHAR},
+      task_class_name = #{taskClassName,jdbcType=VARCHAR},
+      params = #{params,jdbcType=CHAR},
+      error_msg = #{errorMsg,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="findByStatus" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_api_task
+        <where>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="host != null">
+              and  host = #{host,jdbcType=VARCHAR}
+            </if>
+
+        </where>
+    </select>
+
+    <select id="findByParentTaskId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_api_task
+        where t_parent_task_id=#{parentTaskId}
+    </select>
+
+    <select id="findNextTaskByStatusToRun" resultMap="BaseResultMap">
+        UPDATE t_api_task SET status='TASK_DOING', id = LAST_INSERT_ID(id) WHERE status=#{status} LIMIT 1;
+        select
+        <include refid="Base_Column_List"/>
+        from t_api_task where ROW_COUNT() > 0 and id = LAST_INSERT_ID()
+    </select>
+
+    <select id="findCalculateTask" resultMap="BaseResultMap">
+      select
+        <include refid="Base_Column_List"/>
+       from t_api_task where
+        task_class_name = #{taskClassName} and params ->'$."assertId"' = #{assetId} and  JSON_EXTRACT(params,'$."statusDate"') = #{statusDate}
+
+  </select>
+
+    <select id="findByGroupBatch" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_api_task
+        where group_batch=#{groupBatch}
+    </select>
+
+    <select id="findListByQueryVo" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM t_api_task
+        <where>
+            <if test='id!=null and id!=""'>
+                id = #{id}
+            </if>
+            <if test='taskClassName!=null and taskClassName!=""'>
+                task_class_name = #{taskClassName}
+            </if>
+            <if test='status!=null and status!=""'>
+                AND status = #{status}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateApiTaskById" parameterType="com.weshare.assertstatus.entity.ApiTaskBean">
+		UPDATE t_api_task SET status= #{status},error_msg=null
+		WHERE id=#{id}
+	</update>
+
+    <select id="getApiTaskById" parameterType="java.lang.Integer"
+            resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM t_api_task WHERE id=#{id}
+    </select>
+
+    <select id="getRepaymentSchTask" parameterType="string" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from t_api_task
+        where task_class_name = #{taskClassName} and JSON_EXTRACT(params, '$."assertId"') = #{assetId}
+    </select>
+
+
+
+    <select id="updateRepaymentInfoTask">
+        UPDATE t_api_task SET status= #{status} where JSON_EXTRACT(params, '$."IMPORTFILETYPE"') = #{fileType} and JSON_EXTRACT(params, '$."借据号"') = #{assetId}
+    </select>
+
+
+    <select id="selectDataByCreateDate" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from t_api_task
+        where status = 'TASK_SUCCESS' AND create_time &lt;= #{createDate} limit #{start},#{end}
+    </select>
+    <select id="countDataByCreateDate" resultType="int">
+        select count(id)
+        from t_api_task
+        where status = 'TASK_SUCCESS' AND create_time &lt;= #{createDate}
+    </select>
+
+
+    <delete id="deleteByPrimaryKeyBatch" >
+    delete from t_api_task
+    where id in
+    <foreach collection="list" item="task" separator="," open="(" close=")">
+        #{task.id}
+    </foreach>
+  </delete>
+</mapper>
